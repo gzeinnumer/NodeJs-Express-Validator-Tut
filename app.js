@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const { check, validationResult } = require('express-validator')
 
 const app = express()
-const port = 5000
+const port = 3000
 
 // Set Templating Enginge
 app.set('view engine', 'ejs')
@@ -11,11 +11,11 @@ app.set('view engine', 'ejs')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Navigation
-app.get('', (req, res)=> {
+app.get('', (req, res) => {
     res.render('index')
 })
 
-app.get('/register', (req, res)=> {
+app.get('/register', (req, res) => {
     res.render('register')
 })
 
@@ -27,16 +27,18 @@ app.post('/register', urlencodedParser, [
         .isEmail()
         .normalizeEmail()
 
-], (req, res)=> {
+], (req, res) => {
 
-    const errors = validationResult(req)
-    if(!errors.isEmpty()) {
-        // return res.status(422).jsonp(errors.array())
-        const alert = errors.array()
-        res.render('register', {
-            alert
-        })
-    }
+    // const errors = validationResult(req)
+    // if (!errors.isEmpty()) {
+    //     // return res.status(422).jsonp(errors.array())
+    //     const alert = errors.array()
+    //     res.render('register', {
+    //         alert
+    //     })
+    // }
+
+    console.log('Got body:', req.body);
 
 
 })
